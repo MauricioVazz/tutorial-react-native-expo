@@ -1,62 +1,115 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={styles.box1}></View>
-      <Text style={styles.tituloPrincipal}>🚀 Testando no Browser</Text>
-      <Text style={styles.subTitulo}>React Native com estilo!</Text>
-      <Text style={styles.paragrafo}>Paragrafo</Text>
-      <Text style={styles.link}>Clique Aqui</Text>
-      <StatusBar style="auto" />
-      <View style={styles.box2}></View>
+      <View style={styles.header}>
+        <Text>Logo</Text>
+        <View style={styles.menu}></View>
+      </View>
+      <View style={styles.content}>
+        <View style={styles.card}>
+          <View style={styles.image}>as</View>
+          <View style={styles.text}>
+            <Text style={styles.cardText}>Card Titulo</Text>
+            <Text style={styles.cardText2}>Card Conteudo Card Conteudo Card Conteudo Card Conteudo</Text>
+          </View>
+        </View>
+        <View style={styles.card}>
+          <View style={styles.image}>as</View>
+          <View style={styles.text}>
+            <Text style={styles.cardText}>Card Titulo</Text>
+            <Text style={styles.cardText2}>Card Conteudo Card Conteudo Card Conteudo Card Conteudo</Text>
+          </View>
+        </View>
+        <View style={styles.botao}>
+          <Text style={styles.footerText}>Ver Mais</Text>
+        </View>
+      </View>
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>Mauricio</Text>
+      </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#56ff46ff",
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  header: {
+    backgroundColor: "#46d4ffff",
     flex: 1,
-    backgroundColor: '#1e1e2f',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '20',
+    width: "100%",
+    justifyContent: "space-between", 
+    alignItems: "center",
+    flexDirection: "row",
+    padding: 20,
   },
-  tituloPrincipal: {
-    fontSize: '20px',
-    fontWeight: 'bold',
-    color: '#00f2ff',
-    marginVertical: '10px',
+  content: {
+    backgroundColor: "#ff3232ff",
+    flex: 7,
+    width: "100%",
+    alignItems: "center",
   },
-  subTitulo: {
-    fontSize: '16px',
-    color: '#ccc',
+  menu: {
+    width: 40,
+    height: 40,
+    backgroundColor: "#1d1d1dff",
   },
-  paragrafo: {
-    fontSize: '14px',
-    color: '#fff',
-    marginVertical: '10px',
+  card: {
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    padding: 20,
+    margin: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "90%",
   },
-  link: {
-    fontSize: '12px',
-    color: '#00f2ff',
-    textDecorationLine: 'underline',
-    marginTop: '20px',
-    cursor: 'pointer',
-    hover: {
-      color: '#00bfff',
-    },
-    marginVertical: '10px',
-  },
-  box1: {
-    width: '100%',
+  image: {
+    width: 50,
     height: 50,
-    backgroundColor: '#00f2ff',
+    backgroundColor: "#473b8dff",
+    borderRadius: 10,
+    marginRight: 20,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  box2: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#442c85ff',
+  text: {
+    flex: 1,
+    justifyContent: "center",
   },
-});
+  cardText: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  cardText2: {
+    fontSize: 14,
+    color: "#474747ff",
+    flexWrap: "wrap",
+  },
+  botao: {
+    backgroundColor: "#0054b4ff",
+    padding: 15,
+    borderRadius: 10,
+    marginTop: 20,
+    width: "40%",
+    alignItems: "center",
+  },
+  footer: {
+    flex: 1,
+    backgroundColor: '#a202ffff',
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  footerText: {
+    color: "#ffffff",
+    fontSize: 20,
+    fontWeight: "bold",
+  }
+})
