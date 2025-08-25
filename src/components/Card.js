@@ -1,12 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet,} from 'react-native';
+import {Image} from 'expo-image'
 
-function Card() {
+function Card({ titulo, desc, img }) {
     return (
         <View style={styles.card}>
-            <View style={styles.image}>as</View>
+            {/* <View style={styles.image}>as</View> */}
+          <Image
+            style={styles.image}
+            source={img}
+          />
             <View style={styles.text}>
-            <Text style={styles.cardText}>Card Titulo</Text>
-            <Text style={styles.cardText2}>Card Conteudo Card Conteudo Card Conteudo Card Conteudo</Text>
+            <Text style={styles.cardText}>{titulo}</Text>
+          <Text style={styles.cardText2}>{desc}</Text>
             </View>
         </View>
   )

@@ -9,8 +9,8 @@ function Botao() {
 }
 const styles = StyleSheet.create({
   botao: {
-    backgroundColor: "#0054b4ff",
-    padding: 15,
+    backgroundColor: "#b40000ff",
+    padding: 10,
     borderRadius: 10,
     marginTop: 20,
     width: "40%",
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "bold",
   }
 })
