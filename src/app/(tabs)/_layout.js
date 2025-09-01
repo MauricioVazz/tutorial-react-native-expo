@@ -1,6 +1,5 @@
 import { Stack, Tabs } from "expo-router";
 import Entypo from '@expo/vector-icons/Entypo';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
@@ -14,7 +13,7 @@ export default function RootLayout() {
             tabBarLabelStyle: { fontSize: 8 },
         }}>
             <Tabs.Screen
-                name="index"
+                name="home"
                 options={{
                     title: "Home",
                     HeaderShown: false,

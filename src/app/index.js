@@ -1,24 +1,29 @@
-import { Stack } from "expo-router"
+import { View, Text, Button, StyleSheet } from 'react-native'
+import { useRouter } from 'expo-router'
 
-export default function Layout() {
+export default function Initializer() {
+
+    const router = useRouter()
+
     return (
-        <Stack>
-            <Stack.Screen   
-                name="index"
-                options={{ headerShown: false }}
+        <View style={styles.container}>
+            <Text>Inicializador</Text>
+            <Button 
+                title='Login'
+                onPress={() => router.navigate('/login')}
             />
-             <Stack.Screen   
-                name="login"
-                options={{ title: "Login" }}
+            <Button 
+                title='Home'
+                onPress={() => router.navigate('/home')}
             />
-             <Stack.Screen   
-                name="singup"
-                options={{ title: "Cadastrar" }}
-            />
-            <Stack.Screen   
-                name="(tabs)"
-                options={{ headerShown: false }}
-            />
-        </Stack>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
