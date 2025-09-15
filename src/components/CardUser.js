@@ -1,7 +1,34 @@
-import { View, Text, StyleSheet,} from 'react-native';
-import {Image} from 'expo-image'
+import { View, Text, StyleSheet, Pressable} from 'react-native';
+import { Image } from 'expo-image';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Feather from '@expo/vector-icons/Feather';
+import { useRouter } from 'expo-router';
 
-function CardUser({ name, email, avatar }) {
+function CardUser({ id, name, email, avatar, users, setUsers }) {
+
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    const response = await fetch(`http://localhost:3000/profile/${id}`, {
+      method: 'DELETE'
+    });
+    if (response.ok) {
+      console.log('Deletado com sucesso');
+      const updatedUsers = users.filter(user => user.id !== id); // Cria um novo array sem o id que foi excluído
+      setUsers(updatedUsers); // Atualiza o estado com o novo array
+    } else {
+      console.log('Erro ao deletar');
+    }
+  };
+
+  const handleEdit = () => {
+    console.log('Editar usuário', id);
+    router.push({
+      pathname: '/edituser',
+      params: { id, name, email, avatar }
+    })
+  }
+
     return (
         <View style={styles.card}>
             {/* <View style={styles.image}>as</View> */}
@@ -9,10 +36,18 @@ function CardUser({ name, email, avatar }) {
             style={styles.image}
             source={avatar}
           />
-            <View style={styles.text}>
+          <View style={styles.text}>
             <Text style={styles.cardText}>{name}</Text>
-          <Text style={styles.cardText2}>{email}</Text>
-            </View>
+            <Text style={styles.cardText2}>{email}</Text>
+          </View>
+        <View>
+          <Pressable onPress={handleEdit} >
+            <Feather name="edit-2" size={24} color="black" />
+          </Pressable>
+          <Pressable onPress={handleDelete}>            
+            <FontAwesome5 name="trash" size={24} color="black" />
+            </Pressable>
+          </View>
         </View>
   )
 }

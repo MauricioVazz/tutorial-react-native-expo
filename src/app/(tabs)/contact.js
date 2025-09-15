@@ -32,9 +32,12 @@ export default function Contact() {
             {users.map((user) => (
                 <CardUser
                     key={user.id}
+                    id={user.id}
                     name={user.name}
                     email={user.email}
                     avatar={user.avatar}
+                    users={users}
+                    setUsers={setUsers}
                 />
             ))}
             <Button title="Voltar" onPress={() => router.replace('/')} />
