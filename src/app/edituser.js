@@ -1,6 +1,6 @@
 import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
-import { useRouter } from 'expo-router'
-import { useState, useGlobalSearchParams } from 'react'
+import { useRouter, useGlobalSearchParams } from 'expo-router'
+import { useState } from 'react'
 
 export default function EditUser() {
 
@@ -33,6 +33,7 @@ export default function EditUser() {
 
         if (response.ok) {
             console.log('Cadastrado com sucesso')
+            router.navigate('/login')
         } else {
             console.log('Erro ao cadastrar')
         }
@@ -43,25 +44,25 @@ export default function EditUser() {
             <Text style={styles.title}>Editar Perfil</Text>
 
             <View style={styles.form}>
-            <Text>Nome</Text>
+            <Text>Nome:</Text>
                 <TextInput
                     style={styles.input}
                     value={name}
                     onChangeText={setName}
                 />
-                <Text>Email</Text>
+                <Text>Email:</Text>
                 <TextInput
                     style={styles.input}
                     value={email}
                     onChangeText={setEmail}
                 />
-                <Text>Senha</Text>
+                <Text>Senha:</Text>
                 <TextInput
                     style={styles.input}
                     value={pass}
                     onChangeText={setPass}
                 />
-                <Text>Avatar</Text>
+                <Text>Avatar:</Text>
                 <TextInput
                     style={styles.input}
                     value={avatar}
