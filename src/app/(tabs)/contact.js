@@ -2,13 +2,12 @@ import { View, Text, StyleSheet, Button } from "react-native-web";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import CardUser from "../../components/CardUser.js";
+import { useUserStore } from "../../stores/useUserStore.js";
 
 export default function Contact() {
     const router = useRouter();
+    const { users, setUsers } = useUserStore();
 
-    const [users, setUsers] = useState([])
-
-    // users = []
 
     useEffect(() => {
         const listUsers = async () => {
@@ -36,8 +35,6 @@ export default function Contact() {
                     name={user.name}
                     email={user.email}
                     avatar={user.avatar}
-                    users={users}
-                    setUsers={setUsers}
                 />
             ))}
             <Button title="Voltar" onPress={() => router.replace('/')} />
