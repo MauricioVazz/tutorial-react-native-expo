@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button } from "react-native-web";
+import { View, Text, StyleSheet, Button, ScrollView, FlatList } from "react-native-web";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import CardUser from "../../components/CardUser.js";
@@ -27,19 +27,17 @@ export default function Contact() {
 
     return (
         <View style={styles.container}>
-            <Text>Página de Contato</Text>
-            {users.map((user) => (
-                <CardUser
-                    key={user.id}
-                    id={user.id}
-                    name={user.name}
-                    email={user.email}
-                    avatar={user.avatar}
-                />
-            ))}
-            <Button title="Voltar" onPress={() => router.replace('/')} />
-            <Button title="Sobre" onPress={() => router.push('/about')} />
-            <Button title="Perfil" onPress={() => router.push('/profile')} />
+            <FlatList
+                data={users}
+                renderItem={({ item }) => <CardUser
+                    key={item.id}
+                    id={item.id}
+                    nome={item.nome}
+                    email={item.email}
+                    avatar={item.avatar}
+                />}
+                keyExtractor={(item) => item.id.toString()}
+            />
         </View>
     )
 }
@@ -47,7 +45,7 @@ export default function Contact() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
+        //justifyContent: "center",
+        //alignItems: "center",
     },
 })

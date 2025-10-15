@@ -2,7 +2,8 @@ import { View, Text, StyleSheet,} from 'react-native';
 import {Image} from 'expo-image'
 
 function Card({ titulo, desc, img }) {
-    return (
+  return (
+      <View style={styles.container}>      
         <View style={styles.card}>
             {/* <View style={styles.image}>as</View> */}
           <Image
@@ -14,10 +15,16 @@ function Card({ titulo, desc, img }) {
           <Text style={styles.cardText2}>{desc}</Text>
             </View>
         </View>
+      </View >
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   card: {
     backgroundColor: "#ffffff",
     borderRadius: 10,

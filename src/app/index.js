@@ -5,6 +5,19 @@ export default function Initializer() {
 
     const router = useRouter()
 
+    useEffect(() => {
+        const checkLogin = async () => {
+            const isLogged = await AsyncStorage.getItem('logado')
+            if(isLogged === 'true'){
+                router.replace('/home')
+            } else {
+                router.replace('/login')
+            }
+        }
+
+        checkLogin()
+    }, [])
+
     return (
         <View style={styles.container}>
             <Text>Inicializador</Text>
