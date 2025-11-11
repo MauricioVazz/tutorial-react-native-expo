@@ -29,6 +29,7 @@ export default function Login() {
         if(response.ok){
             const userLogged = await response.json()
             console.log("Logado com sucesso!", userLogged)
+            console.log("Token:", userLogged.token)
             login(userLogged)
             await AsyncStorage.setItem('userLogged', JSON.stringify(userLogged))
             router.replace('/home')
@@ -63,6 +64,12 @@ export default function Login() {
                 <Button 
                     title='Entrar'
                     onPress={handleLogin}
+                />
+            </View>
+            <View style={{ marginTop: 20 }}>
+                <Button 
+                    title='Cadastre-se'
+                    onPress={() => router.push('/register')}
                 />
             </View>
         </View>

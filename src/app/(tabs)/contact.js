@@ -32,11 +32,11 @@ export default function Contact() {
                 renderItem={({ item }) => <CardUser
                     key={item.id}
                     id={item.id}
-                    nome={item.nome}
+                    name={item.name}
                     email={item.email}
                     avatar={item.avatar}
                 />}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={item => item.id}
             />
         </View>
     )

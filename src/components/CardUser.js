@@ -4,20 +4,30 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import Feather from '@expo/vector-icons/Feather';
 import { useRouter } from 'expo-router';
 import { useUserStore } from '../stores/useUserStore';
+import { useAuthStore } from '../stores/useAuthStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function CardUser({ id, name, email, avatar }) {
 
   const router = useRouter();
   const { users, setUsers } = useUserStore();
+  const { token, logout } = useAuthStore();
 
   const handleDelete = async () => {
     const response = await fetch(`http://localhost:3000/profile/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
     });
     if (response.ok) {
       console.log('Deletado com sucesso');
       const updatedUsers = users.filter(user => user.id !== id); // Cria um novo array sem o id que foi excluído
       setUsers(updatedUsers); // Atualiza o estado com o novo array
+      router.replace('/login')
+      logout()
+      await AsyncStorage.removeItem('userLogged')
     } else {
       console.log('Erro ao deletar');
     }

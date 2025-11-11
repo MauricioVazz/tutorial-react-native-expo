@@ -2,10 +2,13 @@ import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
 import { useRouter, useGlobalSearchParams } from 'expo-router'
 import { useState } from 'react'
 import { useUserStore } from '../stores/useUserStore'
+import { useAuthStore } from '../stores/useAuthStore'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function EditUser() {
 
-    const {users, setUsers} = useUserStore()
+    const { users, setUsers } = useUserStore()
+    const { token, logout } = useAuthStore()
 
     const router = useRouter()
     const {id, name: eName, email: eEmail, avatar: eAvatar} = useGlobalSearchParams()
@@ -16,18 +19,19 @@ export default function EditUser() {
     const [avatar, setAvatar] = useState(eAvatar)
 
     const handleEdit = async () => {
+        console.log('Token do user logado:', token);
 
         const profile = {
             name,
             email,
-            pass,
             avatar
         }
 
         const response = await fetch(`http://localhost:3000/profile/${id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify(profile),
         })
@@ -44,6 +48,13 @@ export default function EditUser() {
             setUsers(updatedUsers)
             router.navigate('/contact')
         } else {
+            const data = await response.json()
+            if (response.status === 401 && data.errorCode === 'INVALID_TOKEN') {
+                console.log('Token inválido ou expirado. Faça login novamente.')
+                await AsyncStorage.removeItem('userLogged')
+                router.replace('/login')
+                logout()
+            }
             console.log('Erro ao Editar perfil')
         }
     }
@@ -65,12 +76,12 @@ export default function EditUser() {
                     value={email}
                     onChangeText={setEmail}
                 />
-                <Text>Senha:</Text>
+                {/* <Text>Senha:</Text>
                 <TextInput
                     style={styles.input}
                     value={pass}
                     onChangeText={setPass}
-                />
+                /> */}
                 <Text>Avatar:</Text>
                 <TextInput
                     style={styles.input}
